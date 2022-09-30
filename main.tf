@@ -1,7 +1,7 @@
-data "aws_vpc" "catapimba_vpc" {
+data "aws_vpc" "jenkins_vpc" {
   filter {
     name   = "tag:Name"
-    values = ["catapimba-corps-vpc"]
+    values = ["Terraform-network"]
   }
 }
 
@@ -30,7 +30,7 @@ module "jenkins_sg" {
 
   name        = "jenkins-sg"
   description = "Security group para o servidor do Jenkins Server"
-  vpc_id      = data.aws_vpc.catapimba_vpc.id
+  vpc_id      = data.aws_vpc.jenkins_vpc.id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-80-tcp", "ssh-tcp"]
